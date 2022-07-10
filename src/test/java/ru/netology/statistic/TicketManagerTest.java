@@ -3,6 +3,8 @@ package ru.netology.statistic;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TicketManagerTest {
@@ -11,7 +13,7 @@ public class TicketManagerTest {
     Ticket ticket1 = new Ticket(568922, 6000, "LIN", "DME", 350);
     Ticket ticket2 = new Ticket(568923, 4000, "DME", "LIN", 290);
     Ticket ticket3 = new Ticket(568924, 15000, "DME", "MAD", 400);
-    Ticket ticket4 = new Ticket(568925, 25000, "MAD", "LIN", 450);
+    Ticket ticket4 = new Ticket(568925, 5000, "MAD", "LIN", 450);
     Ticket ticket5 = new Ticket(568926, 5500, "MAD", "DME", 500);
     Ticket ticket6 = new Ticket(568927, 7000, "DME", "LIN", 320);
     Ticket ticket7 = new Ticket(568928, 3000, "DME", "MXP", 280);
@@ -114,5 +116,59 @@ public class TicketManagerTest {
         Ticket[] expected = {ticket2, ticket, ticket6};
 
         Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void sortShowAllTest() {
+        TicketRepository repository = new TicketRepository();
+        TicketManager manager = new TicketManager(repository);
+
+        manager.add(ticket);
+        manager.add(ticket1);
+        manager.add(ticket2);
+        manager.add(ticket3);
+        manager.add(ticket4);
+        manager.add(ticket5);
+        manager.add(ticket6);
+        manager.add(ticket7);
+        manager.add(ticket8);
+        manager.add(ticket9);
+        manager.add(ticket10);
+
+        Ticket[] tickets = repository.showAll();
+        Arrays.sort(tickets);
+
+        Ticket[] actual = tickets;
+        Ticket[] expected = {ticket7, ticket2, ticket, ticket4, ticket5, ticket1, ticket9, ticket6, ticket8, ticket10, ticket3};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void getPriceTest() {
+        TicketRepository repository = new TicketRepository();
+        TicketManager manager = new TicketManager(repository);
+
+        manager.add(ticket);
+
+        int actual = ticket.getPrice();
+        int expected = 5000;
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getTravelTimeTest() {
+        TicketRepository repository = new TicketRepository();
+        TicketManager manager = new TicketManager(repository);
+
+        manager.add(ticket);
+
+        ticket.setTravelTime(400);
+
+        int actual = ticket.getTravelTime();
+        int expected = 400;
+
+        Assertions.assertEquals(expected, actual);
     }
 }
