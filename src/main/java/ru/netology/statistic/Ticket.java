@@ -1,8 +1,6 @@
 package ru.netology.statistic;
 
-import org.jetbrains.annotations.NotNull;
-
-public class Ticket implements Comparable <Ticket> {
+public class Ticket implements Comparable<Ticket> {
     private int id;
     private int price;
     private String departureAir;

@@ -11,7 +11,7 @@ public class TicketRepository {
         tickets = newTickets;
     }
 
-    public Ticket[] findAll() {
+    public Ticket[] showAll() {
         return tickets;
     }
 

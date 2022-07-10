@@ -1,5 +1,7 @@
 package ru.netology.statistic;
 
+import java.util.Arrays;
+
 public class TicketManager {
     private TicketRepository repository;
 
@@ -19,7 +21,7 @@ public class TicketManager {
     }
 
     public Ticket findById(int id) {
-        for (Ticket ticket : repository.findAll()) {
+        for (Ticket ticket : repository.showAll()) {
             if (ticket.getId() == id) {
                 return ticket;
             }
@@ -29,7 +31,7 @@ public class TicketManager {
 
     public Ticket[] findAll(String from, String to) {
         Ticket[] result = new Ticket[0];
-        for (Ticket ticket : repository.findAll()) {
+        for (Ticket ticket : repository.showAll()) {
             if (matches(ticket, from, to)) {
                 Ticket[] tickets = new Ticket[result.length + 1];
                 for (int i = 0; i < result.length; i++) {
@@ -37,6 +39,7 @@ public class TicketManager {
                 }
                 tickets[tickets.length - 1] = ticket;
                 result = tickets;
+                Arrays.sort(result);
             }
         }
         return result;
